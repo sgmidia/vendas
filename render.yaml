@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: command-center
+    env: node
+    plan: free
+    buildCommand: "cd server && npm install && cd ../client && npm install && npm run build"
+    startCommand: "cd server && node server.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /data/data.db
+    disk:
+      name: db
+      mountPath: /data
+      sizeGB: 1
